@@ -268,9 +268,7 @@
                     </div>
                   </li>
                 </ul>
-
               </div>
-
             </div>
           </div>
         </div>
@@ -296,9 +294,7 @@
             <button type="button" class="button" disabled>Готовьте!</button>
           </div>
         </div>
-
       </div>
-
     </form>
   </main>
 </template>
