@@ -5,20 +5,20 @@ import ingredients from '@/common/enums/ingredients'
 
 export const normalizeDough = item => ({
   ...item,
-  type: doughSizes[item.id]
+  value: doughSizes[item.id]
 })
 
 export const normalizeSize = item => ({
   ...item,
-  type: sizes[item.id]
+  value: sizes[item.id]
 })
 
 export const normalizeSauces = item => ({
   ...item,
-  type: sauces[item.id]
+  value: sauces[item.id]
 })
 
 export const normalizeIngredients = item => ({
   ...item,
-  type: ingredients[item.id]
+  value: ingredients[item.id]
 })
