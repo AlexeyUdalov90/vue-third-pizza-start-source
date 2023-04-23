@@ -24,31 +24,11 @@
           </div>
         </app-drag>
 
-        <div class="counter ingredients__counter">
-          <button
-              type="button"
-              class="counter__button counter__button--minus"
-              :disabled="getValue(ingredientType.value) === 0"
-              @click="decrementValue(ingredientType.value)"
-          >
-            <span class="visually-hidden">Меньше</span>
-          </button>
-          <input
-              type="text"
-              name="counter"
-              class="counter__input"
-              :value="getValue(ingredientType.value)"
-              @input="inputValue(ingredientType.value, $event.target.value)"
-          />
-          <button
-              type="button"
-              class="counter__button counter__button--plus"
-              :disabled="getValue(ingredientType.value) === MAX_INGREDIENT_COUNT"
-              @click="incrementValue(ingredientType.value)"
-          >
-            <span class="visually-hidden">Больше</span>
-          </button>
-        </div>
+        <app-counter
+          class="ingredients__counter"
+          :count="getValue(ingredientType.value)"
+          @counter:update="setValue(ingredientType.value, $event)"
+        />
       </li>
     </ul>
   </div>
@@ -57,6 +37,7 @@
 <script setup>
 import { toRef } from "vue";
 import AppDrag from "@/common/components/AppDrag.vue";
+import AppCounter from '@/common/components/AppCounter.vue'
 import { MAX_INGREDIENT_COUNT } from "@/common/constants";
 
 const props = defineProps({
@@ -80,17 +61,17 @@ const setValue = (ingredient, count) => {
   emit("update", ingredient, Number(count));
 };
 
-const decrementValue = (ingredient) => {
-  setValue(ingredient, getValue(ingredient) - 1);
-};
-
-const incrementValue = (ingredient) => {
-  setValue(ingredient, getValue(ingredient) + 1);
-};
-
-const inputValue = (ingredient, count) => {
-  return setValue(ingredient, Math.min(MAX_INGREDIENT_COUNT, Number(count)));
-};
+// const decrementValue = (ingredient) => {
+//   setValue(ingredient, getValue(ingredient) - 1);
+// };
+//
+// const incrementValue = (ingredient) => {
+//   setValue(ingredient, getValue(ingredient) + 1);
+// };
+//
+// const inputValue = (ingredient, count) => {
+//   return setValue(ingredient, Math.min(MAX_INGREDIENT_COUNT, Number(count)));
+// };
 
 const getImage = (image) => {
   return new URL(`../../assets/img/${image}`, import.meta.url).href;
