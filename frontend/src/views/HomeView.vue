@@ -133,20 +133,6 @@ const getImage = image => {
 @import "@/assets/scss/mixins/mixins.scss";
 
 .content {
-  padding-top: 20px;
-
-  &__wrapper {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-
-    width: 920px;
-    margin: 0 auto;
-    padding-right: 2.12%;
-    padding-bottom: 30px;
-    padding-left: 2.12%;
-  }
-
   &__ingredients {
     width: 527px;
     margin-top: 15px;
@@ -184,32 +170,6 @@ const getImage = image => {
       margin-left: 12px;
       padding: 16px 45px;
     }
-  }
-}
-
-.sheet {
-  padding-top: 15px;
-
-  border-radius: 8px;
-  background-color: $white;
-  box-shadow: $shadow-light;
-
-  &__title {
-    padding-right: 18px;
-    padding-left: 18px;
-  }
-
-  &__content {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    margin-top: 8px;
-    padding-top: 18px;
-    padding-right: 18px;
-    padding-left: 18px;
-
-    border-top: 1px solid rgba($green-500, 0.1);
   }
 }
 </style>
