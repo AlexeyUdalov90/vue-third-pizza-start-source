@@ -26,8 +26,9 @@
 
         <app-counter
           class="ingredients__counter"
-          :count="getValue(ingredientType.value)"
-          @counter:update="setValue(ingredientType.value, $event)"
+          :value="getValue(ingredientType.value)"
+          :max="MAX_INGREDIENT_COUNT"
+          @input="setValue(ingredientType.value, $event)"
         />
       </li>
     </ul>
@@ -58,20 +59,8 @@ const getValue = (ingredient) => {
 };
 
 const setValue = (ingredient, count) => {
-  emit("update", ingredient, Number(count));
+  emit("update", ingredient, Math.min(MAX_INGREDIENT_COUNT, count));
 };
-
-// const decrementValue = (ingredient) => {
-//   setValue(ingredient, getValue(ingredient) - 1);
-// };
-//
-// const incrementValue = (ingredient) => {
-//   setValue(ingredient, getValue(ingredient) + 1);
-// };
-//
-// const inputValue = (ingredient, count) => {
-//   return setValue(ingredient, Math.min(MAX_INGREDIENT_COUNT, Number(count)));
-// };
 
 const getImage = (image) => {
   return new URL(`../../assets/img/${image}`, import.meta.url).href;

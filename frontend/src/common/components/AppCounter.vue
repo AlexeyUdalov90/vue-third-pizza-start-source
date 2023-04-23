@@ -3,8 +3,8 @@
     <button
         type="button"
         class="counter__button counter__button--minus"
-        :disabled="count === 0"
-        @click="decrementValue"
+        :disabled="value === min"
+        @click="emit('input', value - 1)"
     >
       <span class="visually-hidden">Меньше</span>
     </button>
@@ -12,14 +12,15 @@
         type="text"
         name="counter"
         class="counter__input"
-        :value="count"
-        @input="inputValue"
+        :value="value"
+        @input="emit('input', Number($event.target.value))"
     />
     <button
         type="button"
         class="counter__button counter__button--plus"
-        :disabled="count === MAX_INGREDIENT_COUNT"
-        @click="incrementValue"
+        :class="{ 'counter__button--orange': accent }"
+        :disabled="value === max"
+        @click="emit('input', value + 1)"
     >
       <span class="visually-hidden">Больше</span>
     </button>
@@ -27,28 +28,28 @@
 </template>
 
 <script setup>
-import { MAX_INGREDIENT_COUNT } from "@/common/constants";
+import { defineProps, defineEmits } from 'vue'
 
-const props = defineProps({
-  count: {
+defineProps({
+  value: {
     type: Number,
-    default: 0
-  }
+    required: true,
+  },
+  accent: {
+    type: Boolean,
+    default: false,
+  },
+  min: {
+    type: Number,
+    default: 0,
+  },
+  max: {
+    type: Number,
+    default: 100,
+  },
 })
 
-const emit = defineEmits(['counter:update'])
-
-const decrementValue = () => {
-  emit('counter:update', props.count - 1)
-}
-
-const incrementValue = () => {
-  emit('counter:update', props.count + 1)
-}
-
-const inputValue = (value) => {
-  emit('counter:update', Math.min(MAX_INGREDIENT_COUNT, Number(value)))
-}
+const emit = defineEmits(['input'])
 </script>
 
 <style lang="scss" scoped>
